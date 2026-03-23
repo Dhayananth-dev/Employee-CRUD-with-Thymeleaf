@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>View</title>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: radial-gradient(circle at top, #0f2027, #000000);
+    color: #ffffff;
+}
+
+div[align="center"] {
+    margin-top: 40px;
+}
+
+h1 {
+    color: #00ffff;
+    text-shadow:
+        0 0 5px #00ffff,
+        0 0 10px #00ffff,
+        0 0 20px #00ffff;
+    margin-bottom: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    background: rgba(0, 0, 0, 0.65);
+    box-shadow:
+        0 0 15px #00ffff,
+        0 0 30px rgba(0, 255, 255, 0.4);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th {
+    padding: 15px;
+    color: #00ffff;
+    background: rgba(0, 255, 255, 0.15);
+    text-shadow: 0 0 5px #00ffff;
+    border: 1px solid #00ffff;
+}
+
+td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #00ffff;
+}
+
+tr:hover {
+    background: rgba(0, 255, 255, 0.1);
+}
+
+button {
+    padding: 8px 18px;
+    margin: 3px;
+    background: transparent;
+    color: #00ffff;
+    border: 2px solid #00ffff;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    text-shadow: 0 0 5px #00ffff;
+    box-shadow:
+        0 0 8px #00ffff,
+        inset 0 0 8px #00ffff;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background: #00ffff;
+    color: #000;
+    box-shadow:
+        0 0 20px #00ffff,
+        0 0 40px #00ffff;
+}
+
+h4 {
+    color: #00ff99;
+    text-shadow:
+        0 0 5px #00ff99,
+        0 0 10px #00ff99;
+    margin-top: 20px;
+}
+
+a {
+    text-decoration: none;
+}
+
+</style>
+</head>
+<body>
+<div align="center">
+<h1>Employee Data</h1>
+<table border="3px" cellspacing="0px" cellpadding="15px">
+<tr>
+<th>Id</th>
+<th>Name</th>
+<th>Mobile</th>
+<th>Salary</th>
+<th>Department</th>
+<th>Date</th>
+<th>Actions</th>
+</tr>
+<tr th:each="emp:${ans}"> 
+<td th:text="${emp.id}"></td>
+<td th:text="${emp.name}"></td>
+<td th:text="${emp.mobile}"></td>
+<td th:text="${emp.salary}"></td>
+<td th:text="${emp.department}"></td>
+<td th:text="${emp.doj}"></td>
+<td> <a th:href="'/edit/'+${emp.id}"><button >Edit</button></a>
+ <a th:href="'/delete/'+${emp.id}"><button>Delete</button></a> 
+ </td>
+</tr>
+</table>
+<br>
+<h4 th:text="${Emp}"></h4>
+<a href="/"><button>Home</button></a>
+</div>
+<script th:if="${msg}">
+alert("[[${msg}]]")
+</script>
+<script th:if="${m}">
+alert("[[${m}]]")
+</script>
+</body>
+</html>

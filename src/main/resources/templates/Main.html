@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Main</title>
+<style >
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    background: radial-gradient(circle at top, #0f2027, #000000);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+}
+
+/* Center cyber panel */
+div[align="center"] {
+    padding: 45px 65px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.65);
+    border-radius: 18px;
+    box-shadow:
+        0 0 15px #00ffff,
+        0 0 30px rgba(0, 255, 255, 0.4);
+}
+
+/* Cyber title */
+h1 {
+    color: #00ffff;
+    margin-bottom: 30px;
+    text-shadow:
+        0 0 5px #00ffff,
+        0 0 12px #00ffff,
+        0 0 25px #00ffff;
+}
+
+/* Cyber buttons */
+button {
+    padding: 14px 36px;
+    margin: 12px;
+    background: transparent;
+    color: #00ffff;
+    border: 2px solid #00ffff;
+    border-radius: 28px;
+    cursor: pointer;
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px #00ffff;
+    box-shadow:
+        0 0 10px #00ffff,
+        inset 0 0 10px #00ffff;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover glow */
+button:hover {
+    background: #00ffff;
+    color: #000;
+    box-shadow:
+        0 0 25px #00ffff,
+        0 0 45px #00ffff;
+}
+
+/* Remove underline */
+a {
+    text-decoration: none;
+}
+
+</style>
+</head>
+<body>
+<div align="center">
+<h1 th:text="${m}"></h1>
+<h1 align="center">Employee Management System</h1>
+<a href="form"><button>Add</button></a>
+<a href="view"><button>View</button></a></div>
+<script th:if="${Saved}"> 
+alert("[[${Saved}]]")
+</script>
+</body>
+</html>
