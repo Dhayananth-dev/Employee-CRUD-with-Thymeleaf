@@ -1,22 +1,26 @@
 package com.atomi.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.atomi.entity.Employee;
-import com.atomi.repository.Employeerepo;
+import com.atomi.service.EmployeeService;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class Control {
-	@Autowired
-	Employeerepo emp;
+	private final EmployeeService employeeService;
+
+	public Control(EmployeeService employeeService) {
+		this.employeeService = employeeService;
+	}
 
 	@GetMapping("/")
 	public String main() {
@@ -24,45 +28,48 @@ public class Control {
 	}
 
 	@GetMapping("/form")
-	public String form() {
+	public String form(ModelMap m) {
+		if (!m.containsAttribute("employee")) {
+			m.put("employee", new Employee());
+		}
 		return "Add.html";
 	}
 
 	@GetMapping("/view")
 	public String view(ModelMap m) {
-		List<Employee> l = emp.findAll();
-		if (l.isEmpty()) {
-			m.put("m", "No data found");
-			return "/Main.html";
-		}
-		m.put("ans", l);
+		m.put("ans", employeeService.getAllEmployees());
 		return "View.html";
 	}
 
 	@PostMapping("/add")
-	public String add(Employee e, RedirectAttributes r) {
-		emp.save(e);
+	public String add(@Valid @ModelAttribute("employee") Employee e, BindingResult result, RedirectAttributes r) {
+		if (result.hasErrors()) {
+			return "Add.html";
+		}
+		employeeService.addEmployee(e);
 		r.addFlashAttribute("Saved", "Emlployee Details Added");
 		return "redirect:/";
 	}
 
 	@GetMapping("/delete/{id}")
 	public String del(@PathVariable Integer id, RedirectAttributes r) {
-		emp.deleteById(id);
+		employeeService.deleteEmployee(id);
 		r.addFlashAttribute("msg", "Data deleted");
 		return "redirect:/view";
 	}
 
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable int id, ModelMap m) {
-		Employee e = emp.findById(id).orElse(null);
-		m.put("hi", e);
-		return "Edit";
+		m.put("employee", employeeService.getEmployeeById(id));
+		return "Edit.html";
 	}
 
 	@PostMapping("/update")
-	public String update(Employee e, RedirectAttributes r) {
-		emp.save(e);
+	public String update(@Valid @ModelAttribute("employee") Employee e, BindingResult result, RedirectAttributes r) {
+		if (result.hasErrors()) {
+			return "Edit.html";
+		}
+		employeeService.updateEmployee(e);
 		r.addFlashAttribute("m", "Updated Successfully");
 		return "redirect:/view";
 

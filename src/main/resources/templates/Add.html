@@ -65,6 +65,13 @@ input:focus {
         0 0 15px #00ffff;
 }
 
+.error {
+    margin-top: 6px;
+    color: #ff7b7b;
+    font-size: 13px;
+    text-align: left;
+}
+
 button {
     padding: 10px 25px;
     background: transparent;
@@ -95,28 +102,43 @@ a button {
 </head>
 <body>
 <div align="center">
-<form action="/add" method="post">
+<form action="/add" method="post" th:object="${employee}">
 <h1 align="center">Enter the Details</h1>
 <table>
 <tr>
 <td> <label for="name">Name</label></td>
-<td><input type="text" id="name" placeholder="Enter Name" name="name"></td>
+<td>
+<input type="text" id="name" placeholder="Enter Name" th:field="*{name}">
+<div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+</td>
 </tr>
 <tr> 
 <td> <label for="no">Mobile</label></td>
-<td><input type="number" id="no" placeholder="Enter Mobileno" name="mobile"></td>
+<td>
+<input type="text" id="no" placeholder="Enter Mobileno" th:field="*{mobile}">
+<div class="error" th:if="${#fields.hasErrors('mobile')}" th:errors="*{mobile}"></div>
+</td>
 </tr>
 <tr> 
 <td> <label for="sal">Salary</label></td>
-<td><input type="number" id="sal" placeholder="Enter salary" name="salary"></td>
+<td>
+<input type="number" id="sal" placeholder="Enter salary" th:field="*{salary}">
+<div class="error" th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"></div>
+</td>
 </tr>
 <tr>
 <td> <label for="dept">Department</label></td>
-<td><input type="text" id="dept" placeholder="Enter Department" name="department"></td>
+<td>
+<input type="text" id="dept" placeholder="Enter Department" th:field="*{department}">
+<div class="error" th:if="${#fields.hasErrors('department')}" th:errors="*{department}"></div>
+</td>
 </tr>
 <tr> 
 <td> <label for="date">Date</label></td>
-<td><input type="date" id="date" name="doj"></td>
+<td>
+<input type="date" id="date" th:field="*{doj}">
+<div class="error" th:if="${#fields.hasErrors('doj')}" th:errors="*{doj}"></div>
+</td>
 </tr>
 <tr> <td colspan="2" align="center"> 
 <button type="submit">Add</button>
