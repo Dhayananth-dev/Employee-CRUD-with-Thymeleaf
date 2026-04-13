@@ -3,149 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <title>Form</title>
-<style >
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background: radial-gradient(circle at top, #0f2027, #000000);
-    color: #ffffff;
-}
-
-div[align="center"] {
-    margin-top: 40px;
-}
-
-h1 {
-    color: #00ffff;
-    text-shadow:
-        0 0 5px #00ffff,
-        0 0 10px #00ffff,
-        0 0 20px #00ffff;
-    margin-bottom: 20px;
-}
-
-table {
-    border-collapse: collapse;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.6);
-    box-shadow:
-        0 0 15px #00ffff,
-        0 0 30px rgba(0, 255, 255, 0.4);
-    border-radius: 10px;
-}
-
-td {
-    padding: 10px;
-}
-
-label {
-    color: #00ffff;
-    text-shadow: 0 0 5px #00ffff;
-}
-
-input {
-    width: 220px;
-    padding: 8px;
-    background: transparent;
-    border: 2px solid #00ffff;
-    border-radius: 5px;
-    color: #ffffff;
-    outline: none;
-    box-shadow: 0 0 8px #00ffff;
-}
-
-input::placeholder {
-    color: #99ffff;
-}
-
-input:focus {
-    box-shadow:
-        0 0 5px #00ffff,
-        0 0 15px #00ffff;
-}
-
-.error {
-    margin-top: 6px;
-    color: #ff7b7b;
-    font-size: 13px;
-    text-align: left;
-}
-
-button {
-    padding: 10px 25px;
-    background: transparent;
-    color: #00ffff;
-    border: 2px solid #00ffff;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 15px;
-    text-shadow: 0 0 5px #00ffff;
-    box-shadow:
-        0 0 10px #00ffff,
-        inset 0 0 10px #00ffff;
-    transition: all 0.3s ease-in-out;
-}
-
-button:hover {
-    background: #00ffff;
-    color: #000;
-    box-shadow:
-        0 0 20px #00ffff,
-        0 0 40px #00ffff;
-}
-
-a button {
-    margin-top: 20px;
-}
-</style>
+<link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-<div align="center">
-<form action="/add" method="post" th:object="${employee}">
-<h1 align="center">Enter the Details</h1>
-<table>
-<tr>
-<td> <label for="name">Name</label></td>
-<td>
-<input type="text" id="name" placeholder="Enter Name" th:field="*{name}">
-<div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
-</td>
-</tr>
-<tr> 
-<td> <label for="no">Mobile</label></td>
-<td>
-<input type="text" id="no" placeholder="Enter Mobileno" th:field="*{mobile}">
-<div class="error" th:if="${#fields.hasErrors('mobile')}" th:errors="*{mobile}"></div>
-</td>
-</tr>
-<tr> 
-<td> <label for="sal">Salary</label></td>
-<td>
-<input type="number" id="sal" placeholder="Enter salary" th:field="*{salary}">
-<div class="error" th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"></div>
-</td>
-</tr>
-<tr>
-<td> <label for="dept">Department</label></td>
-<td>
-<input type="text" id="dept" placeholder="Enter Department" th:field="*{department}">
-<div class="error" th:if="${#fields.hasErrors('department')}" th:errors="*{department}"></div>
-</td>
-</tr>
-<tr> 
-<td> <label for="date">Date</label></td>
-<td>
-<input type="date" id="date" th:field="*{doj}">
-<div class="error" th:if="${#fields.hasErrors('doj')}" th:errors="*{doj}"></div>
-</td>
-</tr>
-<tr> <td colspan="2" align="center"> 
-<button type="submit">Add</button>
-</td> </tr>
-</table>
-</form>
-<a href="/"><button>Back</button></a>
+<main class="page-shell centered-layout">
+<section class="panel-card">
+<div class="panel-header">
+<div>
+<span class="eyebrow">Create record</span>
+<h1 class="panel-title">Add employee details</h1>
+<p class="panel-copy">Capture the essentials with a simpler layout that stays readable even when validation messages appear.</p>
 </div>
+<a href="/" class="btn btn-ghost">Back Home</a>
+</div>
+<form action="/add" method="post" th:object="${employee}" class="employee-form">
+<div class="form-grid">
+<div class="field-group">
+<label class="field-label" for="name">Name</label>
+<input class="field-input" type="text" id="name" placeholder="Enter full name" th:field="*{name}">
+<div class="error-text" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+</div>
+<div class="field-group">
+<label class="field-label" for="no">Mobile</label>
+<input class="field-input" type="text" id="no" placeholder="Enter mobile number" th:field="*{mobile}">
+<div class="error-text" th:if="${#fields.hasErrors('mobile')}" th:errors="*{mobile}"></div>
+</div>
+<div class="field-group">
+<label class="field-label" for="sal">Salary</label>
+<input class="field-input" type="number" id="sal" placeholder="Enter salary" th:field="*{salary}">
+<div class="error-text" th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"></div>
+</div>
+<div class="field-group">
+<label class="field-label" for="dept">Department</label>
+<input class="field-input" type="text" id="dept" placeholder="Enter department" th:field="*{department}">
+<div class="error-text" th:if="${#fields.hasErrors('department')}" th:errors="*{department}"></div>
+</div>
+<div class="field-group field-span">
+<label class="field-label" for="date">Date of joining</label>
+<input class="field-input" type="date" id="date" th:field="*{doj}">
+<div class="error-text" th:if="${#fields.hasErrors('doj')}" th:errors="*{doj}"></div>
+</div>
+</div>
+<div class="form-actions">
+<button class="btn btn-primary" type="submit">Save Employee</button>
+<a href="/view" class="btn btn-secondary">Open Employee List</a>
+</div>
+</form>
+</section>
+</main>
 </body>
 </html>
