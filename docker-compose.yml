@@ -4,7 +4,7 @@ services:
        image: employee
        container_name: crud
        ports:
-         - "8080:8080"
+         - "2030:2030"
        depends_on:
          - db  
        env_file:
