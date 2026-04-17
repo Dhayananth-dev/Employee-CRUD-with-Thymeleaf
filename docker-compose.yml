@@ -7,15 +7,11 @@ services:
          - "2030:2030"
        depends_on:
          - db  
-       env_file:
-         - .env
        restart: always
     db:
       image: mysql:8
       container_name: empdata
       restart: always
-      env_file:
-         - .env
       ports:
         - "3307:3306"
       volumes:
