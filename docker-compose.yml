@@ -15,9 +15,9 @@ services:
       container_name: empdata
       restart: always
       ports:
+        - "3307:3306"
       env_file:
         - .env
-        - "3307:3306"
       volumes:
         - mysql_data:/var/lib/mysql  
 volumes:
