@@ -4,7 +4,7 @@ services:
        image: employee
        container_name: crud
        ports:
-        - "8080:2030"
+        - "8081:2030"
        environment:
         SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/employee
         SPRING_DATASOURCE_USERNAME: root
