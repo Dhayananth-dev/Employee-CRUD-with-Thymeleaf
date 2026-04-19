@@ -37,7 +37,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public Employee addEmployee(Employee employee) {
-		return saveEmployee(employee, "Unable to save employee details right now");
+		return saveEmployee(employee, "Unable to save employee ");
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		if (employee.getId() == null || !employeeRepo.existsById(employee.getId())) {
 			throw new EmployeeNotFoundException("Employee not found with id: " + employee.getId());
 		}
-		return saveEmployee(employee, "Unable to update employee details right now");
+		return saveEmployee(employee, "Unable to update employee ");
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		try {
 			employeeRepo.deleteById(id);
 		} catch (DataAccessException ex) {
-			throw new ServiceException("Unable to delete employee details right now", ex);
+			throw new ServiceException("Unable to delete employee ", ex);
 		}
 	}
 
