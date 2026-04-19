@@ -1,5 +1,5 @@
 pipeline{
-    agent any{
+    agent any
         stages{
             stage('maven'){
                 steps{
@@ -15,7 +15,6 @@ pipeline{
                 steps{
                      sh 'echo "build successfully"' 
                 }
-            }
         }
     }
 }
