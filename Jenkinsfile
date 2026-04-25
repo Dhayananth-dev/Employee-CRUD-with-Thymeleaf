@@ -17,6 +17,8 @@ pipeline{
                  docker-compose down -v
                  docker rm -f $con
                  docker system prune -af
+                 else
+                 docker-compose up -d --build
                  fi
                  '''
             }
