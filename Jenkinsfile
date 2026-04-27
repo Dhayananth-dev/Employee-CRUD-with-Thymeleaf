@@ -18,7 +18,7 @@ pipeline{
                  docker rm -f $con
                  docker system prune -af
                  else
-                 docker-compose up -d --build
+                 echo "No Containers are Running"
                  fi
                  '''
             }
